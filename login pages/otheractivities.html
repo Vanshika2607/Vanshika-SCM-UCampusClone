@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Other Activities</title>
+  <style>
+    /* Apply a nice Google font */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap'); /* Additional stylish font */
+    
+    body {
+      font-family: 'Roboto', sans-serif; /* Updated font */
+      background-color: #f8f9fa;
+      background-image: url("blue-background-7470781_1280.jpg"); /* Add your background image path */
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      background-image: url('your-container-background.jpg'); /* Add your container background image */
+      background-size: cover;
+      background-position: center;
+    }
+
+    h1 {
+      font-size: 4rem; /* Increased font size for heading */
+      margin-bottom: 40px;
+      font-weight: 700; /* Bold for more emphasis */
+      font-style: italic;
+      color: transparent;
+      background: linear-gradient(45deg, #007bff, #00d4ff, #00b5e2); /* Gradient text */
+      -webkit-background-clip: text; /* Apply the gradient to text */
+      background-clip: text;
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); /* Adding a shadow to text */
+      letter-spacing: 3px; /* Add space between letters */
+      animation: gradientAnimation 3s ease infinite; /* Animation for gradient */
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .activities {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .activity-box {
+      width: 300px; /* Increased box size */
+      height: 300px; /* Increased box size */
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      background-color: transparent; /* Removed blue background color */
+    }
+
+    .activity-box:hover {
+      transform: scale(1.1); /* Increased hover effect */
+    }
+
+    .activity-box img {
+      width: 100%; /* Make image fill entire box width */
+      height: 100%; /* Make image fill entire box height */
+      object-fit: cover; /* Ensure the image covers the entire box */
+      border-radius: 15px;
+    }
+
+    .activity-name {
+      font-size: 1.5rem; /* Larger font for activity name */
+      font-weight: 600;
+      position: absolute; /* Position the name on top of the image */
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
+      padding: 5px 10px;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .activities {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .activity-box {
+        width: 80%;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 2rem; /* Slightly smaller heading on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Other Activities</h1>
+
+    <div class="activities">
+      <!-- Uniform Box with link -->
+      <a href="uniform.html" class="activity-box">
+        <img src="uniform.png" alt="Uniform Image"> <!-- Add your image path here -->
+        <p class="activity-name">Uniform</p>
+      </a>
+
+      <!-- Gym Box with link -->
+      <a href="gym.html" class="activity-box">
+        <img src="Screenshot 2024-11-27 220249.png" alt="Gym Image"> <!-- Add your image path here -->
+        <p class="activity-name">Gym</p>
+      </a>
+
+      <!-- Salon Box with link to salonimage.png -->
+      <a href="salonimage.png" class="activity-box" target="_blank"> <!-- The target="_blank" will open the image in a new tab -->
+        <img src="salon.jpg" alt="Salon Image"> <!-- Add your image path here -->
+        <p class="activity-name">Salon</p>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

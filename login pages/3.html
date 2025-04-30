@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Form</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 50px;
+            padding: 0;
+            background-image: url(12.webp);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .background-clip{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        @media (min-aspect-ratio:16/9) {
+            .background-clip{
+                width: 100%;
+                height: auto;
+            }
+         }
+         @media (max-aspect-ratio: 16/9) {
+            .background-clip{
+                width: auto;
+                height: 100%;
+            }
+         }
+        
+        .container {
+            width: 100vh;
+            max-width: 400px;
+            margin: auto; 
+            padding: 20px;
+            box-sizing: border-box;
+            border: 5px solid grey;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+            color: #000;
+        }
+
+        h2 {
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .gender-label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #f00;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 25px;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            background-color: #c00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <video autoplay loop muted plays-inline class="background-clip" >
+            <source src = "WhatsApp Video 2024-11-26 at 5.05.52 PM.mp4" type="video/mp4" >
+        </video> -->
+        <h1>Welcome</h1>
+        <h2>Help us Know You Better!</h2>
+        <form id="welcomeForm">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+
+            <label>Gender</label>
+            <label class="gender-label">
+                <input type="radio" name="gender" value="male" required> Male
+            </label>
+            <label class="gender-label">
+                <input type="radio" name="gender" value="female" required> Female
+            </label>
+
+            <label for="campus">Which campus</label>
+            <input type="text" id="campus" name="campus" placeholder="Himachal/Punjab">
+
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob">
+
+            <label for="referralCode">Referral Code</label>
+            <input type="text" id="referralCode" name="referralCode" placeholder="Referral Code">
+
+            <button type="submit" class="submit-button"> <a href="5.html" style="text-decoration: none; color: #e4d6d6;">Submit</a></button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('welcomeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Request for location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Location fetched successfully
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    alert(`Location fetched: Latitude: ${latitude}, Longitude: ${longitude}`);
+
+                    // Optionally, you can store or send this data
+                    // Redirect to the location permission page
+                    window.location.href = 'location-permission.html?lat=' + latitude + '&lon=' + longitude;
+                }, function() {
+                    // Handle location permission denied
+                    alert("Unable to retrieve your location. Please allow location access.");
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        });
+    </script>
+    <!-- <script src="js/annyang.min.js"></script> -->
+    <!-- <script>
+        if (annyang) { -->
+  <!-- // Let's define our first command. First the text we expect, and then the function it should call
+//   var commands = {
+//     'night mode': function() {
+//       let root = document.documentElement;
+//       root.style.setProperty('--white', '#000');
+//       root.style.setProperty('--black','#fff');
+//     },
+//     'day mode': function() {
+//       let root = document.documentElement;
+//       root.style.setProperty('--white', '#fff');
+//       root.style.setProperty('--black','#000');
+//     },
+//   };
+
+  // Add our commands to annyang
+//   annyang.addCommands(commands);
+
+  // Start listening. You can call this here, or attach this call to an event, button, etc.
+//   annyang.start(); -->
+<!-- }
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <style>
+    /* Set the background image to cover the entire body */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("hamburger-french-fries-fried-chicken-takeaway-containers-wooden-background-food-delivery-fast-concept-banner-148651717.webp"); /* Add your image URL here */
+      background-size: cover; /* Ensure the image covers the whole page */
+      background-position: center center; /* Position the image at the center */
+      background-repeat: no-repeat; /* Prevent the image from repeating */
+      min-height: 100vh; /* Ensure the background covers the entire height */
+      color: white; /* Text color for better readability */
+    }
+
+    /* Menu container to display the menu items */
+    .menu-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.9); /* Slight opacity for contrast */
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-header {
+      text-align: center;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #d32f2f;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #757575;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-details {
+      flex: 1;
+    }
+
+    .menu-title {
+      font-size: 1.1em;
+      margin: 0;
+      color: rgb(32, 48, 5);
+    }
+
+    .menu-subtitle {
+      font-size: 0.9em;
+      color: #2f0202;
+      margin: 5px 0 10px 0;
+    }
+
+    .menu-price {
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .menu-action button {
+      padding: 5px 10px;
+      font-size: 0.9em;
+      border: none;
+      border-radius: 5px;
+      color: #02221a;
+      background-color: #d32f2f;
+      cursor: pointer;
+    }
+
+    .menu-action button:hover {
+      background-color: #b71c1c;
+    }
+
+    .cart-container {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: rgba(229, 224, 238, 0.9); /* Slight opacity */
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-header {
+      font-size: 1.5em;
+      color: #d32f2f;
+      margin-bottom: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      color: black;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #d32f2f;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item button {
+      padding: 5px 10px;
+      font-size: 0.9em;
+      border: none;
+      border-radius: 5px;
+      color: rgb(36, 55, 4);
+      background-color: #e64a19;
+      cursor: pointer;
+    }
+
+    .cart-item button:hover {
+      background-color: #d32f2f;
+    }
+
+    .quantity-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    .quantity-buttons button {
+      padding: 5px;
+      font-size: 1.2em;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .quantity {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .total-bill {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      color: #333333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="menu-container">
+  <div class="menu-header">SIGNATURE HOT</div>
+
+  <!-- First Image Items -->
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Orange Zest Latte Small</p>
+      <p class="menu-subtitle">Orange Zest Latte Small</p>
+      <p class="menu-price" data-price="215">₹215.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Orange Zest Latte Small', 215)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Orange Zest Latte Regular</p>
+      <p class="menu-subtitle">Orange Zest Latte Regular</p>
+      <p class="menu-price" data-price="253">₹253.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Orange Zest Latte Regular', 253)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Orange Zest Latte Large</p>
+      <p class="menu-subtitle">Orange Zest Latte Large</p>
+      <p class="menu-price" data-price="281">₹281.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Orange Zest Latte Large', 281)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Hazelnut Latte Small</p>
+      <p class="menu-subtitle">Hazelnut Latte Small</p>
+      <p class="menu-price" data-price="225">₹225.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Hazelnut Latte Small', 225)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Hazelnut Latte Regular</p>
+      <p class="menu-subtitle">Hazelnut Latte Regular</p>
+      <p class="menu-price" data-price="253">₹253.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Hazelnut Latte Regular', 253)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Hazelnut Latte Large</p>
+      <p class="menu-subtitle">Hazelnut Latte Large</p>
+      <p class="menu-price" data-price="281">₹281.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Hazelnut Latte Large', 281)">Add +</button>
+    </div>
+  </div>
+
+  <!-- Second Image Items -->
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Caramel Latte Small</p>
+      <p class="menu-subtitle">Caramel Latte Small</p>
+      <p class="menu-price" data-price="225">₹225.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Caramel Latte Small', 225)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Caramel Latte Regular</p>
+      <p class="menu-subtitle">Caramel Latte Regular</p>
+      <p class="menu-price" data-price="241">₹241.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Caramel Latte Regular', 241)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Caramel Latte Large</p>
+      <p class="menu-subtitle">Caramel Latte Large</p>
+      <p class="menu-price" data-price="268">₹268.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Caramel Latte Large', 268)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Irish Cappuccino Small</p>
+      <p class="menu-subtitle">Irish Cappuccino Small</p>
+      <p class="menu-price" data-price="215">₹215.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Irish Cappuccino Small', 215)">Add +</button>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <div class="menu-details">
+      <p class="menu-title">Irish Cappuccino Regular</p>
+      <p class="menu-subtitle">Irish Cappuccino Regular</p>
+      <p class="menu-price" data-price="241">₹241.00</p>
+    </div>
+    <div class="menu-action">
+      <button onclick="addToCart('Irish Cappuccino Regular', 241)">Add +</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Section -->
+<div class="cart-container">
+  <div class="cart-header">Your Cart</div>
+  <div id="cart-items"></div>
+  <div class="total-bill">Total: ₹<span id="total-price">0.00</span></div>
+</div>
+
+<script>
+  let cart = [];
+  let total = 0;
+
+  function addToCart(itemName, itemPrice) {
+    let item = cart.find(i => i.name === itemName);
+    if (item) {
+      item.quantity++;
+      total += itemPrice;
+    } else {
+      cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+      total += itemPrice;
+    }
+    updateCart();
+  }
+
+  function removeFromCart(index, itemPrice) {
+    let item = cart[index];
+    if (item.quantity > 1) {
+      item.quantity--;
+      total -= itemPrice;
+    } else {
+      cart.splice(index, 1);
+      total -= itemPrice;
+    }
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartItemsDiv = document.getElementById('cart-items');
+    const totalPriceSpan = document.getElementById('total-price');
+
+    cartItemsDiv.innerHTML = '';
+    cart.forEach((item, index) => {
+      const cartItemDiv = document.createElement('div');
+      cartItemDiv.classList.add('cart-item');
+      cartItemDiv.innerHTML = `
+        <span>${item.name}</span>
+        <span>₹${item.price}</span>
+        <div class="quantity-buttons">
+          <button onclick="removeFromCart(${index}, ${item.price})">-</button>
+          <span class="quantity">${item.quantity}</span>
+          <button onclick="addToCart('${item.name}', ${item.price})">+</button>
+        </div>
+        <button onclick="removeFromCart(${index}, ${item.price})">Remove</button>
+      `;
+      cartItemsDiv.appendChild(cartItemDiv);
+    });
+
+    totalPriceSpan.textContent = total.toFixed(2);
+  }
+</script>
+
+</body>
+</html>

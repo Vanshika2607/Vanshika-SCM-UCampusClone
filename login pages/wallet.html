@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - Food Ordering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            background-image: url("cash-money-bills-on-woodgrain.jpg");
+            color: #333;
+        }
+
+        /* Container for the entire page */
+        .wallet-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header Section */
+        .wallet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .wallet-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .wallet-header .balance {
+            font-size: 28px;
+            font-weight: 600;
+            color: #00b4d8;
+        }
+
+        .add-money-btn {
+            padding: 12px 24px;
+            background-color: #00b4d8;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-money-btn:hover {
+            background-color: #0094b3;
+        }
+
+        /* Transactions Section */
+        .transactions-section {
+            margin-top: 30px;
+        }
+
+        .transactions-section h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .transaction-list {
+            border-top: 1px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .transaction-item .details {
+            font-size: 16px;
+        }
+
+        .transaction-item .amount {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .transaction-item .amount.deposit {
+            color: green;
+        }
+
+        .transaction-item .amount.withdraw {
+            color: red;
+        }
+
+        /* Footer Section */
+        .wallet-footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .wallet-footer a {
+            text-decoration: none;
+            color: #00b4d8;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .wallet-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wallet-container">
+        <!-- Wallet Header Section -->
+        <div class="wallet-header">
+            <h2>My Wallet</h2>
+            <span class="balance">₹ 5,000.00</span>
+            <button class="add-money-btn">Add Money</button>
+        </div>
+
+        <!-- Transactions Section -->
+        <div class="transactions-section">
+            <h3>Recent Transactions</h3>
+
+            <div class="transaction-list">
+                <div class="transaction-item">
+                    <div class="details">Food Order - Pizza</div>
+                    <div class="amount withdraw">- ₹ 300.00</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="details">Food Order - Burger</div>
+                    <div class="amount withdraw">- ₹ 150.00</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="details">Top-up from Bank</div>
+                    <div class="amount deposit">+ ₹ 1,000.00</div>
+                </div>
+                <div class="transaction-item">
+                    <div class="details">Food Order - Pasta</div>
+                    <div class="amount withdraw">- ₹ 450.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="wallet-footer">
+            <a href="#">View All Transactions</a>
+            <a href="#">Refund Policy</a>
+            <a href="#">Help</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

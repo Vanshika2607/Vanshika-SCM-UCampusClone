@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #d32f2f;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+    }
+    .product-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+      padding: 15px;
+    }
+    .product-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .product-description {
+      color: gray;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .customization {
+      color: green;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .add-btn {
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .add-btn:hover {
+      background-color: #b71c1c;
+    }
+    .cart-btn {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .cart {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .cart-item {
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .total {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .remove-btn {
+      background-color: #b71c1c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .remove-btn:hover {
+      background-color: #7f0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Chitkara University Institute of Engineering and Technology</div>
+
+  <div class="container">
+    <div class="product-card">
+      <div class="product-title">BE (Mechanical Engineering With Minor CSE)</div>
+      <div class="product-description">10 T-Shirts + 3 Hoodies</div>
+      <div class="customization">Customization Available</div>
+      <div class="price">₹ 10,100.00</div>
+      <button class="add-btn" onclick="addToCart('BE (Mechanical Engineering With Minor CSE)', 10100)">Add</button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-title">T-Shirt</div>
+      <div class="product-description">T-Shirt</div>
+      <div class="customization">Customization Available</div>
+      <div class="price">₹ 575.00</div>
+      <button class="add-btn" onclick="addToCart('T-Shirt', 575)">Add</button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-title">Hoodie</div>
+      <div class="product-description">Hoodie</div>
+      <div class="customization">Customization Available</div>
+      <div class="price">₹ 1,450.00</div>
+      <button class="add-btn" onclick="addToCart('Hoodie', 1450)">Add</button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-title">Lab Coat Grey</div>
+      <div class="product-description">Lab Coat Grey</div>
+      <div class="customization">Customization Available</div>
+      <div class="price">₹ 450.00</div>
+      <button class="add-btn" onclick="addToCart('Lab Coat Grey', 450)">Add</button>
+    </div>
+
+    <div class="product-card">
+      <div class="product-title">Master In Computer Applications</div>
+      <div class="product-description">8 T-Shirts + 2 Hoodies</div>
+      <div class="customization">Customization Available</div>
+      <div class="price">₹ 7,500.00</div>
+      <button class="add-btn" onclick="addToCart('Master In Computer Applications', 7500)">Add</button>
+    </div>
+  </div>
+
+  <!-- Cart Button -->
+  <button class="cart-btn" onclick="toggleCart()">Cart</button>
+
+  <!-- Cart Modal -->
+  <div class="cart" id="cart" style="display: none;">
+    <div class="cart-title">Your Cart</div>
+    <div id="cartItems">
+      <div>No items in cart</div>
+    </div>
+    <div class="total">Total: ₹ <span id="totalAmount">0.00</span></div>
+  </div>
+
+  <script>
+    // Cart and total variables
+    let cart = [];
+    let totalAmount = 0;
+
+    // Add product to cart
+    function addToCart(itemName, itemPrice) {
+      const item = { name: itemName, price: itemPrice };
+      cart.push(item);
+      totalAmount += itemPrice;
+      updateCartDisplay();
+    }
+
+    // Remove item from cart
+    function removeFromCart(itemIndex) {
+      totalAmount -= cart[itemIndex].price;
+      cart.splice(itemIndex, 1);
+      updateCartDisplay();
+    }
+
+    // Update the cart display
+    function updateCartDisplay() {
+      const cartContainer = document.getElementById('cartItems');
+      const totalDisplay = document.getElementById('totalAmount');
+      
+      // Clear the cart display and update it with items
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<div>No items in cart</div>';
+      } else {
+        cartContainer.innerHTML = '';
+        cart.forEach((item, index) => {
+          const cartItem = document.createElement('div');
+          cartItem.classList.add('cart-item');
+          cartItem.innerHTML = `${item.name} - ₹${item.price} 
+                                <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>`;
+          cartContainer.appendChild(cartItem);
+        });
+      }
+
+      // Update total bill
+      totalDisplay.textContent = totalAmount.toFixed(2);
+    }
+
+    // Toggle the cart visibility
+    function toggleCart() {
+      const cartElement = document.getElementById('cart');
+      cartElement.style.display = cartElement.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

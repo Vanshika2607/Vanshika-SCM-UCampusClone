@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm OTP</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('background-pattern.png'); /* You can replace this with the actual background pattern */
+            background-repeat: repeat;
+        }
+        .container {
+            width: 350px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            width: 100px;
+        }
+        .heading {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .otp-message {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .otp-message span {
+            color: #e53935;
+        }
+        .otp-box {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .btn-submit {
+            background-color: #757575;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-submit:hover {
+            background-color: #616161;
+        }
+        a:visited{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo">
+            <img src="ucampus2.jpg" alt="Campus Logo">
+        </div>
+
+        <!-- Heading -->
+        <div class="heading">Welcome to</div>
+        <div class="heading"><strong>UCampus</strong></div>
+
+        <!-- OTP Message -->
+        <div class="otp-message">
+            OTP has been sent to <span>+91-XXXXXXXXXX</span><br>
+            Kindly enter below the 6 digit code.
+        </div>
+        <div class="otp-message" id="otpMessage"></div>
+        <!-- OTP Input Boxes -->
+        <div class="otp-box">
+            <input type="text" class="otp-input" maxlength="1" id="otp1">
+            <input type="text" class="otp-input" maxlength="1" id="otp2">
+            <input type="text" class="otp-input" maxlength="1" id="otp3">
+            <input type="text" class="otp-input" maxlength="1" id="otp4">
+            <input type="text" class="otp-input" maxlength="1" id="otp5">
+            <input type="text" class="otp-input" maxlength="1" id="otp6">
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn-submit" id="verifyOtp">Submit</button>
+    </div>
+
+
+    <script>
+        // Simulate the OTP process
+        const fakeOtp = "123456"; // Simulated OTP
+
+        // Get phone number from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const phoneNumber = urlParams.get('phone');
+
+        document.getElementById('otpMessage').innerText = `OTP has been sent to ${phoneNumber}. Kindly enter the 6-digit code.`;
+
+        document.getElementById('verifyOtp').addEventListener('click', function() {
+            const otpInput = [
+                document.getElementById('otp1').value,
+                document.getElementById('otp2').value,
+                document.getElementById('otp3').value,
+                document.getElementById('otp4').value,
+                document.getElementById('otp5').value,
+                document.getElementById('otp6').value
+            ].join('');
+
+            if (otpInput === fakeOtp) {
+                alert('OTP verified successfully!');
+                // Redirect to next page or perform further actions
+                window.location.href = '3.html';
+            } else {
+                alert('Invalid OTP. Please try again.');
+            }
+        });
+    </script>
+       
+</body>
+</html>
