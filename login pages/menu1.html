@@ -3,48 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu</title>
+  <title>Signature Hot Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Set the background image to cover the entire body */
-    body {
-      font-family: Arial, sans-serif;
+    /* Base Styles */
+    * {
       margin: 0;
       padding: 0;
-      background-image: url("hamburger-french-fries-fried-chicken-takeaway-containers-wooden-background-food-delivery-fast-concept-banner-148651717.webp"); /* Add your image URL here */
-      background-size: cover; /* Ensure the image covers the whole page */
-      background-position: center center; /* Position the image at the center */
-      background-repeat: no-repeat; /* Prevent the image from repeating */
-      min-height: 100vh; /* Ensure the background covers the entire height */
-      color: white; /* Text color for better readability */
+      box-sizing: border-box;
+      font-family: 'Poppins', Arial, sans-serif;
     }
 
-    /* Menu container to display the menu items */
-    .menu-container {
-      max-width: 600px;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: #333;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 215, 0, 0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Main Container */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 20px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.9); /* Slight opacity for contrast */
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Menu Container */
+    .menu-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s ease-out 0.3s forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .menu-header {
       text-align: center;
-      font-size: 1.5em;
-      margin-bottom: 20px;
+      font-size: 2.2rem;
+      margin-bottom: 30px;
       color: #d32f2f;
+      position: relative;
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .menu-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, #d32f2f, #ff9800);
+      border-radius: 3px;
+    }
+
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
     }
 
     .menu-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px;
-      border-bottom: 1px solid #757575;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      border-left: 4px solid #d32f2f;
     }
 
-    .menu-item:last-child {
-      border-bottom: none;
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #ff9800;
     }
 
     .menu-details {
@@ -52,291 +150,548 @@
     }
 
     .menu-title {
-      font-size: 1.1em;
+      font-size: 1.2rem;
       margin: 0;
-      color: rgb(32, 48, 5);
+      color: #333;
+      font-weight: 600;
     }
 
     .menu-subtitle {
-      font-size: 0.9em;
-      color: #2f0202;
+      font-size: 0.9rem;
+      color: #666;
       margin: 5px 0 10px 0;
+      font-style: italic;
     }
 
     .menu-price {
       font-weight: bold;
-      color: #333333;
+      color: #d32f2f;
+      font-size: 1.1rem;
     }
 
     .menu-action button {
-      padding: 5px 10px;
-      font-size: 0.9em;
+      padding: 8px 15px;
+      font-size: 0.9rem;
       border: none;
-      border-radius: 5px;
-      color: #02221a;
-      background-color: #d32f2f;
+      border-radius: 25px;
+      color: white;
+      background: linear-gradient(45deg, #d32f2f, #ff5722);
       cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .menu-action button:hover {
-      background-color: #b71c1c;
+      background: linear-gradient(45deg, #b71c1c, #e64a19);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(211, 47, 47, 0.4);
     }
 
+    .menu-action button:active {
+      transform: translateY(0);
+    }
+
+    /* Cart Container */
     .cart-container {
-      margin-top: 40px;
-      padding: 20px;
-      background-color: rgba(229, 224, 238, 0.9); /* Slight opacity */
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(5px);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s ease-out 0.5s forwards;
     }
 
     .cart-header {
-      font-size: 1.5em;
+      font-size: 1.8rem;
       color: #d32f2f;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+      position: relative;
+      padding-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .cart-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, #d32f2f, #ff9800);
+      border-radius: 3px;
+    }
+
+    #cart-items {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 10px;
     }
 
     .cart-item {
       display: flex;
-      color: black;
+      color: #333;
       justify-content: space-between;
       align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid #d32f2f;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
     }
 
-    .cart-item:last-child {
-      border-bottom: none;
+    .cart-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .cart-item button {
-      padding: 5px 10px;
-      font-size: 0.9em;
-      border: none;
-      border-radius: 5px;
-      color: rgb(36, 55, 4);
-      background-color: #e64a19;
-      cursor: pointer;
+    .cart-item-info {
+      flex: 1;
     }
 
-    .cart-item button:hover {
-      background-color: #d32f2f;
+    .cart-item-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #d32f2f;
+      font-weight: 500;
     }
 
     .quantity-buttons {
       display: flex;
       align-items: center;
+      margin: 0 15px;
     }
 
     .quantity-buttons button {
-      padding: 5px;
-      font-size: 1.2em;
-      margin: 0 5px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      background-color: #f5f5f5;
+      color: #333;
+      font-size: 1rem;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quantity-buttons button:hover {
+      background-color: #d32f2f;
+      color: white;
     }
 
     .quantity {
-      font-size: 1.1em;
+      font-size: 1.1rem;
       font-weight: bold;
+      margin: 0 10px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .remove-btn {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      background: linear-gradient(45deg, #f44336, #e53935);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .remove-btn:hover {
+      background: linear-gradient(45deg, #e53935, #c62828);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
     }
 
     .total-bill {
-      font-size: 1.2em;
+      font-size: 1.4rem;
       font-weight: bold;
       text-align: center;
-      margin-top: 20px;
-      color: #333333;
+      margin-top: 25px;
+      color: #333;
+      padding-top: 15px;
+      border-top: 2px dashed #d32f2f;
+    }
+
+    #total-price {
+      color: #d32f2f;
+      font-size: 1.6rem;
+    }
+
+    /* Empty Cart Message */
+    .empty-cart {
+      text-align: center;
+      color: #666;
+      padding: 30px 0;
+      font-style: italic;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(#d32f2f, #ff9800);
+      border-radius: 10px;
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      background: linear-gradient(45deg, #4CAF50, #2E7D32);
+      color: white;
+      border-radius: 5px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transform: translateX(200%);
+      transition: transform 0.5s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-container, .cart-container {
+        padding: 20px;
+      }
+      
+      .menu-items {
+        grid-template-columns: 1fr;
+      }
+      
+      .menu-header, .cart-header {
+        font-size: 1.6rem;
+      }
+    }
+
+    /* Floating animation for containers */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .menu-container, .cart-container {
+      animation: float 6s ease-in-out infinite;
     }
   </style>
 </head>
 <body>
-
-<div class="menu-container">
-  <div class="menu-header">SIGNATURE HOT</div>
-
-  <!-- First Image Items -->
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Orange Zest Latte Small</p>
-      <p class="menu-subtitle">Orange Zest Latte Small</p>
-      <p class="menu-price" data-price="215">₹215.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Orange Zest Latte Small', 215)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Orange Zest Latte Regular</p>
-      <p class="menu-subtitle">Orange Zest Latte Regular</p>
-      <p class="menu-price" data-price="253">₹253.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Orange Zest Latte Regular', 253)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Orange Zest Latte Large</p>
-      <p class="menu-subtitle">Orange Zest Latte Large</p>
-      <p class="menu-price" data-price="281">₹281.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Orange Zest Latte Large', 281)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Hazelnut Latte Small</p>
-      <p class="menu-subtitle">Hazelnut Latte Small</p>
-      <p class="menu-price" data-price="225">₹225.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Hazelnut Latte Small', 225)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Hazelnut Latte Regular</p>
-      <p class="menu-subtitle">Hazelnut Latte Regular</p>
-      <p class="menu-price" data-price="253">₹253.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Hazelnut Latte Regular', 253)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Hazelnut Latte Large</p>
-      <p class="menu-subtitle">Hazelnut Latte Large</p>
-      <p class="menu-price" data-price="281">₹281.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Hazelnut Latte Large', 281)">Add +</button>
-    </div>
-  </div>
-
-  <!-- Second Image Items -->
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Caramel Latte Small</p>
-      <p class="menu-subtitle">Caramel Latte Small</p>
-      <p class="menu-price" data-price="225">₹225.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Caramel Latte Small', 225)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Caramel Latte Regular</p>
-      <p class="menu-subtitle">Caramel Latte Regular</p>
-      <p class="menu-price" data-price="241">₹241.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Caramel Latte Regular', 241)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Caramel Latte Large</p>
-      <p class="menu-subtitle">Caramel Latte Large</p>
-      <p class="menu-price" data-price="268">₹268.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Caramel Latte Large', 268)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Irish Cappuccino Small</p>
-      <p class="menu-subtitle">Irish Cappuccino Small</p>
-      <p class="menu-price" data-price="215">₹215.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Irish Cappuccino Small', 215)">Add +</button>
-    </div>
-  </div>
-
-  <div class="menu-item">
-    <div class="menu-details">
-      <p class="menu-title">Irish Cappuccino Regular</p>
-      <p class="menu-subtitle">Irish Cappuccino Regular</p>
-      <p class="menu-price" data-price="241">₹241.00</p>
-    </div>
-    <div class="menu-action">
-      <button onclick="addToCart('Irish Cappuccino Regular', 241)">Add +</button>
-    </div>
-  </div>
-</div>
-
-<!-- Cart Section -->
-<div class="cart-container">
-  <div class="cart-header">Your Cart</div>
-  <div id="cart-items"></div>
-  <div class="total-bill">Total: ₹<span id="total-price">0.00</span></div>
-</div>
-
-<script>
-  let cart = [];
-  let total = 0;
-
-  function addToCart(itemName, itemPrice) {
-    let item = cart.find(i => i.name === itemName);
-    if (item) {
-      item.quantity++;
-      total += itemPrice;
-    } else {
-      cart.push({ name: itemName, price: itemPrice, quantity: 1 });
-      total += itemPrice;
-    }
-    updateCart();
-  }
-
-  function removeFromCart(index, itemPrice) {
-    let item = cart[index];
-    if (item.quantity > 1) {
-      item.quantity--;
-      total -= itemPrice;
-    } else {
-      cart.splice(index, 1);
-      total -= itemPrice;
-    }
-    updateCart();
-  }
-
-  function updateCart() {
-    const cartItemsDiv = document.getElementById('cart-items');
-    const totalPriceSpan = document.getElementById('total-price');
-
-    cartItemsDiv.innerHTML = '';
-    cart.forEach((item, index) => {
-      const cartItemDiv = document.createElement('div');
-      cartItemDiv.classList.add('cart-item');
-      cartItemDiv.innerHTML = `
-        <span>${item.name}</span>
-        <span>₹${item.price}</span>
-        <div class="quantity-buttons">
-          <button onclick="removeFromCart(${index}, ${item.price})">-</button>
-          <span class="quantity">${item.quantity}</span>
-          <button onclick="addToCart('${item.name}', ${item.price})">+</button>
+  <div class="particles" id="particles"></div>
+  
+  <div class="main-container">
+    <div class="menu-container">
+      <div class="menu-header">SIGNATURE HOT</div>
+      
+      <div class="menu-items">
+        <!-- First Group -->
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Orange Zest Latte Small</p>
+            <p class="menu-subtitle">Citrus-infused espresso delight</p>
+            <p class="menu-price" data-price="215">₹215.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Orange Zest Latte Small', 215)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
         </div>
-        <button onclick="removeFromCart(${index}, ${item.price})">Remove</button>
-      `;
-      cartItemsDiv.appendChild(cartItemDiv);
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Orange Zest Latte Regular</p>
+            <p class="menu-subtitle">Citrus-infused espresso delight</p>
+            <p class="menu-price" data-price="253">₹253.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Orange Zest Latte Regular', 253)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Orange Zest Latte Large</p>
+            <p class="menu-subtitle">Citrus-infused espresso delight</p>
+            <p class="menu-price" data-price="281">₹281.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Orange Zest Latte Large', 281)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <!-- Second Group -->
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Hazelnut Latte Small</p>
+            <p class="menu-subtitle">Rich nutty espresso blend</p>
+            <p class="menu-price" data-price="225">₹225.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Hazelnut Latte Small', 225)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Hazelnut Latte Regular</p>
+            <p class="menu-subtitle">Rich nutty espresso blend</p>
+            <p class="menu-price" data-price="253">₹253.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Hazelnut Latte Regular', 253)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Hazelnut Latte Large</p>
+            <p class="menu-subtitle">Rich nutty espresso blend</p>
+            <p class="menu-price" data-price="281">₹281.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Hazelnut Latte Large', 281)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <!-- Third Group -->
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Caramel Latte Small</p>
+            <p class="menu-subtitle">Sweet caramel espresso fusion</p>
+            <p class="menu-price" data-price="225">₹225.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Caramel Latte Small', 225)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Caramel Latte Regular</p>
+            <p class="menu-subtitle">Sweet caramel espresso fusion</p>
+            <p class="menu-price" data-price="241">₹241.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Caramel Latte Regular', 241)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Caramel Latte Large</p>
+            <p class="menu-subtitle">Sweet caramel espresso fusion</p>
+            <p class="menu-price" data-price="268">₹268.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Caramel Latte Large', 268)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <!-- Fourth Group -->
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Irish Cappuccino Small</p>
+            <p class="menu-subtitle">Whiskey-infused coffee classic</p>
+            <p class="menu-price" data-price="215">₹215.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Irish Cappuccino Small', 215)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-details">
+            <p class="menu-title">Irish Cappuccino Regular</p>
+            <p class="menu-subtitle">Whiskey-infused coffee classic</p>
+            <p class="menu-price" data-price="241">₹241.00</p>
+          </div>
+          <div class="menu-action">
+            <button onclick="addToCart('Irish Cappuccino Regular', 241)">
+              <i class="fas fa-plus"></i> Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="cart-container">
+      <div class="cart-header">Your Cart</div>
+      <div id="cart-items">
+        <div class="empty-cart">Your cart is empty</div>
+      </div>
+      <div class="total-bill">Total: ₹<span id="total-price">0.00</span></div>
+    </div>
+  </div>
+
+  <div class="notification" id="notification">
+    Item added to cart!
+  </div>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        const duration = Math.random() * 10 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Cart functionality
+    let cart = [];
+    let total = 0;
+
+    function showNotification() {
+      const notification = document.getElementById('notification');
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function addToCart(itemName, itemPrice) {
+      let item = cart.find(i => i.name === itemName);
+      if (item) {
+        item.quantity++;
+        total += itemPrice;
+      } else {
+        cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+        total += itemPrice;
+      }
+      updateCart();
+      showNotification();
+      
+      // Add animation to the clicked button
+      const button = event.target.closest('button');
+      button.classList.add('clicked');
+      setTimeout(() => {
+        button.classList.remove('clicked');
+      }, 300);
+    }
+
+    function removeFromCart(index, itemPrice) {
+      let item = cart[index];
+      if (item.quantity > 1) {
+        item.quantity--;
+        total -= itemPrice;
+      } else {
+        cart.splice(index, 1);
+        total -= itemPrice;
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      const totalPriceSpan = document.getElementById('total-price');
+
+      cartItemsDiv.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+      } else {
+        cart.forEach((item, index) => {
+          const cartItemDiv = document.createElement('div');
+          cartItemDiv.classList.add('cart-item');
+          cartItemDiv.innerHTML = `
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">₹${item.price.toFixed(2)}</div>
+            </div>
+            <div class="quantity-buttons">
+              <button onclick="removeFromCart(${index}, ${item.price})">-</button>
+              <span class="quantity">${item.quantity}</span>
+              <button onclick="addToCart('${item.name}', ${item.price})">+</button>
+            </div>
+            <button class="remove-btn" onclick="removeFromCart(${index}, ${item.price})">
+              <i class="fas fa-trash"></i>
+            </button>
+          `;
+          cartItemsDiv.appendChild(cartItemDiv);
+        });
+      }
+
+      totalPriceSpan.textContent = total.toFixed(2);
+      
+      // Add animation to cart update
+      cartItemsDiv.style.animation = 'none';
+      setTimeout(() => {
+        cartItemsDiv.style.animation = 'fadeIn 0.5s ease-out';
+      }, 10);
+    }
+
+    // Initialize the page
+    window.addEventListener('load', () => {
+      createParticles();
+      updateCart();
     });
-
-    totalPriceSpan.textContent = total.toFixed(2);
-  }
-</script>
-
+  </script>
 </body>
 </html>
