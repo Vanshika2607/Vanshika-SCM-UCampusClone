@@ -3,49 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Other Activities</title>
+  <title>Explore Our Activities</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Apply a nice Google font */
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap'); /* Additional stylish font */
-    
-    body {
-      font-family: 'Roboto', sans-serif; /* Updated font */
-      background-color: #f8f9fa;
-      background-image: url("blue-background-7470781_1280.jpg"); /* Add your background image path */
-      background-size: cover;
-      background-position: center;
+    /* Base Styles */
+    * {
       margin: 0;
-      padding: 20px;
-      color: #333;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                      url("https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: #fff;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Main Container */
     .container {
       max-width: 1200px;
       margin: 40px auto;
       padding: 40px;
-      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       text-align: center;
-      background-image: url('your-container-background.jpg'); /* Add your container background image */
-      background-size: cover;
-      background-position: center;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s ease-out 0.3s forwards;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     h1 {
-      font-size: 4rem; /* Increased font size for heading */
+      font-size: 4rem;
       margin-bottom: 40px;
-      font-weight: 700; /* Bold for more emphasis */
-      font-style: italic;
+      font-weight: 700;
       color: transparent;
-      background: linear-gradient(45deg, #007bff, #00d4ff, #00b5e2); /* Gradient text */
-      -webkit-background-clip: text; /* Apply the gradient to text */
+      background: linear-gradient(45deg, #4facfe, #00f2fe, #3a7bd5);
+      -webkit-background-clip: text;
       background-clip: text;
-      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); /* Adding a shadow to text */
-      letter-spacing: 3px; /* Add space between letters */
-      animation: gradientAnimation 3s ease infinite; /* Animation for gradient */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      letter-spacing: 2px;
+      animation: gradientAnimation 8s ease infinite;
+      position: relative;
     }
 
     @keyframes gradientAnimation {
@@ -60,96 +116,251 @@
       }
     }
 
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      border-radius: 3px;
+    }
+
     .activities {
       display: flex;
-      justify-content: space-around;
-      gap: 20px;
+      justify-content: center;
+      gap: 30px;
       flex-wrap: wrap;
       padding: 20px;
     }
 
     .activity-box {
-      width: 300px; /* Increased box size */
-      height: 300px; /* Increased box size */
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      height: 320px;
+      border-radius: 20px;
       overflow: hidden;
-      transition: transform 0.3s ease;
-      background-color: transparent; /* Removed blue background color */
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
 
     .activity-box:hover {
-      transform: scale(1.1); /* Increased hover effect */
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .activity-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+      z-index: 1;
     }
 
     .activity-box img {
-      width: 100%; /* Make image fill entire box width */
-      height: 100%; /* Make image fill entire box height */
-      object-fit: cover; /* Ensure the image covers the entire box */
-      border-radius: 15px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .activity-box:hover img {
+      transform: scale(1.1);
     }
 
     .activity-name {
-      font-size: 1.5rem; /* Larger font for activity name */
-      font-weight: 600;
-      position: absolute; /* Position the name on top of the image */
-      bottom: 20px;
+      position: absolute;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for readability */
-      padding: 5px 10px;
       color: white;
-      font-size: 1.2rem;
-      border-radius: 5px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      text-align: center;
+      z-index: 2;
+      width: 90%;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .activity-box:hover .activity-name {
+      bottom: 40px;
+      font-size: 2rem;
+    }
+
+    .activity-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .activity-box:hover::after {
+      opacity: 1;
+    }
+
+    /* Explore Button */
+    .explore-btn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      padding: 12px 25px;
+      background: linear-gradient(45deg, #4facfe, #00f2fe);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.4s ease;
+      z-index: 3;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .activity-box:hover .explore-btn {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .explore-btn:hover {
+      background: linear-gradient(45deg, #00f2fe, #4facfe);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Floating animation for container */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .container {
+      animation: float 8s ease-in-out infinite;
     }
 
     /* Responsive Design */
+    @media (max-width: 992px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .activity-box {
+        width: 280px;
+        height: 280px;
+      }
+    }
+
     @media (max-width: 768px) {
       .activities {
         flex-direction: column;
         align-items: center;
+        gap: 20px;
       }
-
-      .activity-box {
-        width: 80%;
-        margin-bottom: 20px;
-      }
-
+      
       h1 {
-        font-size: 2rem; /* Slightly smaller heading on mobile */
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+      
+      .activity-box {
+        width: 100%;
+        max-width: 350px;
+        height: 250px;
       }
     }
   </style>
 </head>
 <body>
-
+  <div class="particles" id="particles"></div>
+  
   <div class="container">
-    <h1>Other Activities</h1>
+    <h1>Explore Our Activities</h1>
 
     <div class="activities">
-      <!-- Uniform Box with link -->
+      <!-- Uniform Box -->
       <a href="uniform.html" class="activity-box">
-        <img src="uniform.png" alt="Uniform Image"> <!-- Add your image path here -->
+        <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Uniform">
         <p class="activity-name">Uniform</p>
+        <button class="explore-btn">Explore Now</button>
       </a>
 
-      <!-- Gym Box with link -->
+      <!-- Gym Box -->
       <a href="gym.html" class="activity-box">
-        <img src="Screenshot 2024-11-27 220249.png" alt="Gym Image"> <!-- Add your image path here -->
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Gym">
         <p class="activity-name">Gym</p>
+        <button class="explore-btn">Explore Now</button>
       </a>
 
-      <!-- Salon Box with link to salonimage.png -->
-      <a href="salonimage.png" class="activity-box" target="_blank"> <!-- The target="_blank" will open the image in a new tab -->
-        <img src="salon.jpg" alt="Salon Image"> <!-- Add your image path here -->
+      <!-- Salon Box -->
+      <a href="salonimage.png" class="activity-box" target="_blank">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Salon">
         <p class="activity-name">Salon</p>
+        <button class="explore-btn">Explore Now</button>
       </a>
     </div>
   </div>
 
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 10 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        const duration = Math.random() * 10 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Initialize the page
+    window.addEventListener('load', () => {
+      createParticles();
+      
+      // Add click animation to activity boxes
+      const boxes = document.querySelectorAll('.activity-box');
+      boxes.forEach(box => {
+        box.addEventListener('click', () => {
+          box.style.transform = 'translateY(-10px) scale(0.95)';
+          setTimeout(() => {
+            box.style.transform = 'translateY(-10px) scale(1.05)';
+          }, 200);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
