@@ -1,230 +1,661 @@
-:root {
-    --primarycolor: #0e6253;
-    --whiteColor: #fff;
-    --blackColor: #222;
-    --softGreenColor: #d9f2ee;
-    --darkGreyColor: #a7a7a7;
-    --greyColor: #f5f5f5;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <style>
+    :root {
+      --primarycolor: #0e6253;
+      --primarycolor-light: #1a7d6b;
+      --whiteColor: #fff;
+      --blackColor: #222;
+      --softGreenColor: #d9f2ee;
+      --darkGreyColor: #a7a7a7;
+      --greyColor: #f5f5f5;
+      --glassBg: rgba(255, 255, 255, 0.1);
+      --glassBorder: rgba(255, 255, 255, 0.2);
+      --glassShadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+      --transition: all 0.3s cubic-bezier(0.25, 0.5, 0.25, 1);
+    }
 
-/* Resetting some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    font-family: 'Open Sans', sans-serif;
-}
+    /* Resetting some default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+      font-family: 'Open Sans', sans-serif;
+    }
 
-/* Body settings */
-body {
-    width: 100%;
-    height: auto;
-    display: flex;
-}
+    /* Body settings */
+    body {
+      width: 100%;
+      height: auto;
+      min-height: 100vh;
+      display: flex;
+      background-image: url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: var(--whiteColor);
+      animation: fadeIn 1s ease-out;
+    }
 
-/* Sidebar styles */
-.sidebar {
-    height: 100%;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 2%;
-    background-color: var(--primarycolor);
-    color: var(--whiteColor);
-}
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-/* Sidebar menus */
-.sidebar-menus {
-    display: flex;
-    flex-direction: column;
-}
+    /* Sidebar styles */
+    .sidebar {
+      height: 100vh;
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 2%;
+      background-color: rgba(14, 98, 83, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--whiteColor);
+      z-index: 100;
+      transition: var(--transition);
+      border-right: 1px solid var(--glassBorder);
+    }
 
-.sidebar-menus a {
-    padding: 5% 8%;
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--whiteColor);
-}
+    .sidebar-header {
+      padding: 20px 0;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
 
-.sidebar-menus a ion-icon, .sidebar-logout a ion-icon {
-    font-size: 25px;
-}
+    .sidebar-header h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #fff, #d9f2ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-.sidebar-menus a:hover, .sidebar-logout a:hover {
-    background-color: var(--primarycolor);
-    border-radius: 50px;
-}
+    /* Sidebar menus */
+    .sidebar-menus {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
 
-/* Sidebar logout */
-.sidebar-logout a {
-    padding: 5% 8%;
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--whiteColor);
-}
+    .sidebar-menus a, .sidebar-logout a {
+      padding: 12px 16px;
+      margin: 0.2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--whiteColor);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
 
-/* Main section settings */
-.main {
-    width: 100%;
-    height: max-content;
-    min-height: 100vh;
-    padding: 2%;
-    background-image: url("pexels-padrinan-255379.jpg"); /* Set your background image URL here */
-    background-size: cover; /* Ensures the image covers the full area */
-    background-position: center; /* Centers the image */
-    margin-left: 250px;
-    border-radius: 8px; /* Optional: Add rounded corners */
-}
+    .sidebar-menus a ion-icon, .sidebar-logout a ion-icon {
+      font-size: 22px;
+      transition: var(--transition);
+    }
 
-/* Main navbar settings */
-.main-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .sidebar-menus a:hover, .sidebar-logout a:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px);
+    }
 
-/* Search bar */
-.search {
-    width: 60%;
-    height: 40px;
-    display: flex;
-    justify-content: space-around;
-    background-color: var(--whiteColor);
-    border-radius: 20px;
-}
+    .sidebar-menus a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+    }
 
-.search input {
-    width: 80%;
-    height: 100%;
-    padding: 20px;
-    border-radius: 20px;
-    border: none;
-}
+    .sidebar-menus a.active ion-icon {
+      color: var(--softGreenColor);
+    }
 
-.search-btn {
-    background-color: var(--primarycolor);
-    color: var(--whiteColor);
-    border: none;
-    border-radius: 25px;
-    width: 130px;
-    cursor: pointer;
-}
+    /* Sidebar logout */
+    .sidebar-logout {
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+    }
 
-.search:hover {
-    box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
-}
+    /* Main section settings */
+    .main {
+      width: calc(100% - 280px);
+      height: max-content;
+      min-height: 100vh;
+      padding: 2%;
+      margin-left: 280px;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      transition: var(--transition);
+    }
 
-.search-btn:hover {
-    background-color: var(--primarycolor);
-}
+    /* Main navbar settings */
+    .main-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: var(--glassBg);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: var(--glassShadow);
+      margin-bottom: 30px;
+      animation: slideDown 0.5s ease-out;
+    }
 
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-.cart, .user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--whiteColor);
-    font-size: 20px;
-    color: var(--primarycolor);
-    text-decoration: none;
-    padding: 0 10px;
-    height: 40px;
-    border-radius: 50%;
-}
+    /* Search bar */
+    .search {
+      width: 60%;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      background-color: var(--whiteColor);
+      border-radius: 25px;
+      padding: 0 5px 0 20px;
+      transition: var(--transition);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
 
-.cart:hover, .user:hover {
-    box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
-}
+    .search input {
+      width: 80%;
+      height: 100%;
+      border: none;
+      background: transparent;
+      padding: 0 10px;
+      font-size: 15px;
+    }
 
-/* Highlights section */
-.main-highlight {
-    margin: 3% 0;
-    padding: 2%;
-    background-color: rgba(0, 0, 0, 0.5); /* You can adjust the opacity */
-    border-radius: 8px;
-}
+    .search-btn {
+      background-color: var(--primarycolor);
+      color: var(--whiteColor);
+      border: none;
+      border-radius: 20px;
+      width: 120px;
+      height: 38px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-.main-header {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
+    .search:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.main-title {
-    font-size: 20px;
-}
+    .search-btn:hover {
+      background-color: var(--primarycolor-light);
+      transform: scale(1.02);
+    }
 
-.main-arrow {
-    font-size: 24px;
-}
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
 
-.back, .next {
-    cursor: pointer;
-}
+    .cart, .user {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--whiteColor);
+      font-size: 18px;
+      color: var(--primarycolor);
+      text-decoration: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      transition: var(--transition);
+      position: relative;
+    }
 
-.back:hover, .next:hover {
-    color: var(--primarycolor);
-}
+    .cart:hover, .user:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.highlight-wrapper {
-    width: 100%;
-    display: flex;
-    padding: 1%;
-    border-radius: 8px;
-    gap: 1.5rem;
-    overflow-x: hidden;
-}
+    .cart::after {
+      content: '3';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #ff4757;
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.hightlight-card {
-    display: flex;
-    flex-direction: row;
-    min-width: 200px;
-    width: 80%;
-    height: 100%;
-    gap: 1rem;
-    border-radius: 8px;
-    padding: 1%;
-    background-color: var(--greyColor);
-    cursor: pointer;
-    margin: 2%;
-}
+    /* Highlights section */
+    .main-highlight {
+      margin: 3% 0;
+      padding: 2.5%;
+      background-color: var(--glassBg);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: var(--glassShadow);
+      transition: var(--transition);
+      animation: fadeInUp 0.6s ease-out;
+    }
 
-.hightlight-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    object-fit: cover;
-    object-position: center;
-}
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-.hightlight-desc h4 {
-    color: var(--primarycolor);
-}
+    .main-highlight:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
 
-.hightlight-desc p {
-    color: var(--blackColor);
-    font-size: 13px;
-}
+    .main-header {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-.hightlight-card:hover {
-    background-color: rgba(176, 176, 176, 0.2) 0px 2px 8px 0px;
-}
+    .main-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--whiteColor);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .main-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primarycolor), var(--softGreenColor));
+      border-radius: 3px;
+    }
+
+    .main-arrow {
+      display: flex;
+      gap: 15px;
+    }
+
+    .back, .next {
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--glassBg);
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .back:hover, .next:hover {
+      background-color: var(--primarycolor);
+      transform: scale(1.1);
+    }
+
+    .highlight-wrapper {
+      width: 100%;
+      display: flex;
+      padding: 1%;
+      border-radius: 8px;
+      gap: 1.5rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 15px;
+    }
+
+    .highlight-wrapper::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .highlight-wrapper::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+
+    .highlight-wrapper::-webkit-scrollbar-thumb {
+      background: var(--primarycolor);
+      border-radius: 10px;
+    }
+
+    .hightlight-card {
+      display: flex;
+      flex-direction: row;
+      min-width: 250px;
+      width: 80%;
+      height: 100%;
+      gap: 1rem;
+      border-radius: 12px;
+      padding: 2%;
+      background-color: var(--glassBg);
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+      margin: 1%;
+      transition: var(--transition);
+      flex-shrink: 0;
+      animation: cardAppear 0.5s ease-out;
+    }
+
+    @keyframes cardAppear {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .hightlight-card:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .hightlight-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .hightlight-desc h4 {
+      color: var(--whiteColor);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .hightlight-desc p {
+      color: var(--softGreenColor);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .sidebar {
+        width: 80px;
+        padding: 15px 10px;
+        align-items: center;
+      }
+      
+      .sidebar-header h2, 
+      .sidebar-menus a span, 
+      .sidebar-logout a span {
+        display: none;
+      }
+      
+      .sidebar-menus a, .sidebar-logout a {
+        justify-content: center;
+        padding: 15px 0;
+      }
+      
+      .main {
+        width: calc(100% - 80px);
+        margin-left: 80px;
+      }
+      
+      .search {
+        width: 70%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      
+      .search {
+        width: 100%;
+      }
+      
+      .profile {
+        width: 100%;
+        justify-content: flex-end;
+      }
+      
+      .hightlight-card {
+        min-width: 200px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main {
+        width: 100%;
+        margin-left: 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 99;
+        background: var(--primarycolor);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar Navigation -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Dashboard</h2>
+    </div>
+    
+    <div class="sidebar-menus">
+      <a href="#" class="active">
+        <ion-icon name="home"></ion-icon>
+        <span>Home</span>
+      </a>
+      <a href="#">
+        <ion-icon name="stats-chart"></ion-icon>
+        <span>Analytics</span>
+      </a>
+      <a href="#">
+        <ion-icon name="wallet"></ion-icon>
+        <span>Finance</span>
+      </a>
+      <a href="#">
+        <ion-icon name="people"></ion-icon>
+        <span>Team</span>
+      </a>
+      <a href="#">
+        <ion-icon name="settings"></ion-icon>
+        <span>Settings</span>
+      </a>
+      <a href="#">
+        <ion-icon name="help-circle"></ion-icon>
+        <span>Help</span>
+      </a>
+    </div>
+    
+    <div class="sidebar-logout">
+      <a href="#">
+        <ion-icon name="log-out"></ion-icon>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Top Navigation Bar -->
+    <div class="main-navbar">
+      <div class="search">
+        <input type="text" placeholder="Search...">
+        <button class="search-btn">
+          <ion-icon name="search"></ion-icon>
+          Search
+        </button>
+      </div>
+      
+      <div class="profile">
+        <a href="#" class="cart">
+          <ion-icon name="cart"></ion-icon>
+        </a>
+        <a href="#" class="user">
+          <ion-icon name="person"></ion-icon>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Highlights Section -->
+    <div class="main-highlight floating">
+      <div class="main-header">
+        <h2 class="main-title">Today's Highlights</h2>
+        <div class="main-arrow">
+          <ion-icon name="chevron-back" class="back"></ion-icon>
+          <ion-icon name="chevron-forward" class="next"></ion-icon>
+        </div>
+      </div>
+      
+      <div class="highlight-wrapper">
+        <div class="hightlight-card">
+          <img src="https://via.placeholder.com/50" alt="Analytics" class="hightlight-img">
+          <div class="hightlight-desc">
+            <h4>Analytics Report</h4>
+            <p>Latest business analytics and insights</p>
+          </div>
+        </div>
+        
+        <div class="hightlight-card">
+          <img src="https://via.placeholder.com/50" alt="Sales" class="hightlight-img">
+          <div class="hightlight-desc">
+            <h4>Sales Overview</h4>
+            <p>Monthly sales performance metrics</p>
+          </div>
+        </div>
+        
+        <div class="hightlight-card">
+          <img src="https://via.placeholder.com/50" alt="Marketing" class="hightlight-img">
+          <div class="hightlight-desc">
+            <h4>Marketing ROI</h4>
+            <p>Campaign performance analysis</p>
+          </div>
+        </div>
+        
+        <div class="hightlight-card">
+          <img src="https://via.placeholder.com/50" alt="Users" class="hightlight-img">
+          <div class="hightlight-desc">
+            <h4>User Growth</h4>
+            <p>New user acquisition trends</p>
+          </div>
+        </div>
+        
+        <div class="hightlight-card">
+          <img src="https://via.placeholder.com/50" alt="Revenue" class="hightlight-img">
+          <div class="hightlight-desc">
+            <h4>Revenue Streams</h4>
+            <p>Breakdown by product category</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional content sections would go here -->
+  </div>
+
+  <script>
+    // Mobile menu toggle functionality
+    const menuToggle = document.createElement('div');
+    menuToggle.className = 'menu-toggle';
+    menuToggle.innerHTML = '<ion-icon name="menu"></ion-icon>';
+    document.body.appendChild(menuToggle);
+    
+    const sidebar = document.querySelector('.sidebar');
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+    
+    // Highlight card navigation
+    const backBtn = document.querySelector('.back');
+    const nextBtn = document.querySelector('.next');
+    const highlightWrapper = document.querySelector('.highlight-wrapper');
+    
+    backBtn.addEventListener('click', () => {
+      highlightWrapper.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      highlightWrapper.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+    
+    // Add active class to clicked menu item
+    const menuItems = document.querySelectorAll('.sidebar-menus a');
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        menuItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+    
+    // Simulate loading animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.hightlight-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
+  </script>
+</body>
+</html>
