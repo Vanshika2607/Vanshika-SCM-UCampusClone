@@ -3,125 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Campus</title>
+    <title>Choose Your Campus | UCampus</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: #d50000;
+            --primary-light: #ff5131;
+            --primary-dark: #9b0000;
+            --secondary-color: #0b90c8;
+            --text-color: #2d3436;
+            --light-gray: #f5f6fa;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
         }
-
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
         .header {
-            background-color: #d50000;
-            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            padding: 25px 20px;
             text-align: center;
             color: white;
             font-size: 1.5em;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(213, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInDown 0.8s ease-out;
         }
-
-        .location-icon {
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
             width: 100px;
-            margin: 20px auto;
-            display: block;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
         }
-
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .location-icon {
+            width: 120px;
+            margin: 30px auto;
+            display: block;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+            animation: bounce 2s infinite;
+        }
+        
         .location-btn {
-            background-color: #d50000;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: white;
             border: none;
-            padding: 15px;
-            width: 80%;
+            padding: 18px;
+            width: 85%;
+            max-width: 350px;
             margin: 20px auto;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             font-size: 1.1em;
+            font-weight: 500;
             display: block;
             cursor: pointer;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
-
+        
+        .location-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(213, 0, 0, 0.3);
+        }
+        
+        .location-btn:active {
+            transform: translateY(0);
+        }
+        
+        .location-btn i {
+            margin-right: 10px;
+        }
+        
+        .location-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .location-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
         .campus-list {
             background-color: white;
             width: 90%;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 15px;
+            max-width: 500px;
+            margin: 30px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 5px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
-
+        
         .campus-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
             cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-
+        
         .campus-item:last-child {
             border-bottom: none;
         }
-
+        
         .campus-item:hover {
-            background-color: #f8f8f8;
+            background-color: #fafafa;
+            transform: translateX(5px);
         }
-
+        
+        .campus-item:active {
+            background-color: #f5f5f5;
+        }
+        
         .campus-item .info {
             display: flex;
             align-items: center;
         }
-
+        
         .campus-item .info img {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
+            width: 28px;
+            height: 28px;
+            margin-right: 15px;
+            transition: var(--transition);
         }
-
+        
+        .campus-item:hover .info img {
+            transform: scale(1.1);
+        }
+        
         .campus-item .info span {
             font-size: 1.1em;
+            font-weight: 500;
         }
-
+        
+        .campus-item .info .campus-location {
+            color: var(--primary-color);
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
         .campus-item .arrow {
-            font-size: 1.5em;
-            color: #d50000;
+            font-size: 1.3em;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .campus-item:hover .arrow {
+            transform: translateX(5px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 1.3em;
+                padding: 20px;
+            }
+            
+            .location-icon {
+                width: 100px;
+                margin: 25px auto;
+            }
+            
+            .location-btn {
+                padding: 16px;
+                font-size: 1em;
+            }
+            
+            .campus-item {
+                padding: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                font-size: 1.2em;
+                padding: 18px;
+            }
+            
+            .location-icon {
+                width: 90px;
+                margin: 20px auto;
+            }
+            
+            .location-btn {
+                padding: 14px;
+                font-size: 0.95em;
+                width: 90%;
+            }
+            
+            .campus-item {
+                padding: 14px;
+            }
+            
+            .campus-item .info span {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
+    <div class="header animate__animated animate__fadeInDown">
         Choose Your Campus
     </div>
 
-    <img class="location-icon" src="Screenshot 2024-10-01 114821.png" alt="Location Icon">
+    <img class="location-icon animate__animated animate__fadeIn" src="Screenshot 2024-10-01 114821.png" alt="Location Icon">
 
-    <button class="location-btn">Use Current Location</button>
+    <button class="location-btn animate__animated animate__fadeIn">
+        <i class="fas fa-location-arrow"></i> Use Current Location
+    </button>
 
-    <div class="campus-list">
+    <div class="campus-list animate__animated animate__fadeIn">
         <div class="campus-item" onclick="chooseCampus('Chitkara University, Punjab')">
             <div class="info">
                 <img src="Screenshot 2024-10-01 113541.png" alt="Location Pin">
                 <span>Chitkara University</span>
-                <span style="color: #d50000; margin-left: 10px;">Punjab</span>
+                <span class="campus-location">Punjab</span>
             </div>
-            <div class="arrow">&gt;</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
         </div>
 
         <div class="campus-item" onclick="chooseCampus('Chitkara University, Himachal')">
             <div class="info">
                 <img src="Screenshot 2024-10-01 113541.png" alt="Location Pin">
                 <span>Chitkara University</span>
-                <span style="color: #d50000; margin-left: 10px;">Himachal</span>
+                <span class="campus-location">Himachal</span>
             </div>
-            <div class="arrow">&gt;</div>
+            <div class="arrow"><i class="fas fa-chevron-right"></i></div>
         </div>
     </div>
 
     <script>
         function chooseCampus(campusName) {
-            // Redirect to food ordering page with the selected campus as a query parameter
-            window.location.href = 'HOME.HTML?campus=' + encodeURIComponent(campusName);
+            // Add click animation
+            const items = document.querySelectorAll('.campus-item');
+            items.forEach(item => {
+                if (item.getAttribute('onclick').includes(campusName)) {
+                    item.classList.add('animate__animated', 'animate__pulse');
+                }
+            });
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                // Redirect to food ordering page with the selected campus
+                window.location.href = 'HOME.HTML?campus=' + encodeURIComponent(campusName);
+            }, 800);
         }
+        
+        // Add ripple effect to buttons
+        document.querySelector('.location-btn').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                const btn = this;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Detecting Location...';
+                
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Success callback
+                    btn.innerHTML = '<i class="fas fa-check"></i> Location Found!';
+                    btn.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+                    
+                    setTimeout(() => {
+                        // Redirect with location data
+                        window.location.href = `HOME.HTML?location=auto&lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
+                    }, 1000);
+                    
+                }, function(error) {
+                    // Error callback
+                    btn.innerHTML = '<i class="fas fa-location-arrow"></i> Use Current Location';
+                    alert("Could not detect your location. Please select manually or enable location services.");
+                });
+            } else {
+                alert("Geolocation is not supported by your browser. Please select manually.");
+            }
+        });
+        
+        // Add hover effects
+        document.querySelectorAll('.campus-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('img').classList.add('animate__animated', 'animate__rubberBand');
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('img').classList.remove('animate__animated', 'animate__rubberBand');
+            });
+        });
     </script>
-
 </body>
 </html>
