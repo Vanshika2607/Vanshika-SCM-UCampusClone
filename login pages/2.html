@@ -3,77 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm OTP</title>
+    <title>Confirm OTP | UCampus</title>
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #e53935;
+            --primary-hover: #d32f2f;
+            --secondary-color: #0b90c8;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f2f2f2;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-image: url('background-pattern.png'); /* You can replace this with the actual background pattern */
-            background-repeat: repeat;
-        }
-        .container {
-            width: 350px;
-            background-color: #fff;
+            min-height: 100vh;
+            background-image: linear-gradient(135deg, rgba(229, 57, 53, 0.1) 0%, rgba(11, 144, 200, 0.1) 100%), url('background-pattern.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            color: var(--text-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.97);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             text-align: center;
+            transform: translateY(0);
+            transition: var(--transition);
+            animation: fadeInUp 0.6s ease-out;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
         .logo {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            animation: fadeInDown 0.8s ease-out;
         }
+        
         .logo img {
-            width: 100px;
+            width: 120px;
+            height: auto;
+            object-fit: contain;
+            transition: var(--transition);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
         }
+        
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        
         .heading {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            font-weight: 400;
+            color: #555;
+            animation: fadeIn 0.8s ease-out 0.2s both;
         }
+        
+        .heading strong {
+            font-weight: 600;
+            color: var(--primary-color);
+            display: inline-block;
+            animation: rubberBand 1s ease-out 0.4s both;
+        }
+        
         .otp-message {
-            font-size: 14px;
-            margin-bottom: 20px;
-            color: #333;
+            font-size: 15px;
+            margin: 20px 0 30px;
+            color: #666;
+            line-height: 1.5;
+            animation: fadeIn 0.8s ease-out 0.6s both;
         }
+        
         .otp-message span {
-            color: #e53935;
+            color: var(--primary-color);
+            font-weight: 500;
+            display: inline-block;
+            animation: pulse 2s infinite 1s;
         }
+        
         .otp-box {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
         }
+        
         .otp-input {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            width: 50px;
+            height: 60px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
             text-align: center;
-            font-size: 18px;
+            font-size: 24px;
+            font-weight: 600;
+            transition: var(--transition);
+            background-color: var(--light-gray);
         }
+        
+        .otp-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
+            transform: translateY(-3px);
+            outline: none;
+        }
+        
+        .otp-input.filled {
+            border-color: var(--primary-color);
+            background-color: rgba(229, 57, 53, 0.05);
+            animation: pulse 0.5s ease-out;
+        }
+        
         .btn-submit {
-            background-color: #757575;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 12px;
+            border-radius: var(--border-radius);
+            padding: 16px;
             width: 100%;
             cursor: pointer;
             font-size: 16px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(229, 57, 53, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease-out 1s both;
         }
+        
         .btn-submit:hover {
-            background-color: #616161;
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(229, 57, 53, 0.4);
         }
-        a:visited{
-            color: white;
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .btn-submit:disabled {
+            background-color: #bdbdbd;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .resend-otp {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            animation: fadeIn 0.8s ease-out 1.2s both;
+        }
+        
+        .resend-otp a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .resend-otp a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes rubberBand {
+            from {
+                transform: scale3d(1, 1, 1);
+            }
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+            65% {
+                transform: scale3d(0.95, 1.05, 1);
+            }
+            75% {
+                transform: scale3d(1.05, 0.95, 1);
+            }
+            to {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        /* Loading animation */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            .otp-input {
+                width: 40px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .heading {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
@@ -82,7 +302,7 @@
     <div class="container">
         <!-- Logo Section -->
         <div class="logo">
-            <img src="ucampus2.jpg" alt="Campus Logo">
+            <img src="ucampus2.jpg" alt="Campus Logo" class="animate__animated animate__fadeInDown">
         </div>
 
         <!-- Heading -->
@@ -91,54 +311,142 @@
 
         <!-- OTP Message -->
         <div class="otp-message">
-            OTP has been sent to <span>+91-XXXXXXXXXX</span><br>
-            Kindly enter below the 6 digit code.
+            OTP has been sent to <span id="phoneDisplay">+91-XXXXXXXXXX</span><br>
+            Kindly enter the 6-digit verification code.
         </div>
-        <div class="otp-message" id="otpMessage"></div>
+
         <!-- OTP Input Boxes -->
         <div class="otp-box">
-            <input type="text" class="otp-input" maxlength="1" id="otp1">
-            <input type="text" class="otp-input" maxlength="1" id="otp2">
-            <input type="text" class="otp-input" maxlength="1" id="otp3">
-            <input type="text" class="otp-input" maxlength="1" id="otp4">
-            <input type="text" class="otp-input" maxlength="1" id="otp5">
-            <input type="text" class="otp-input" maxlength="1" id="otp6">
+            <input type="text" class="otp-input" maxlength="1" id="otp1" data-next="otp2" autofocus>
+            <input type="text" class="otp-input" maxlength="1" id="otp2" data-next="otp3" data-prev="otp1">
+            <input type="text" class="otp-input" maxlength="1" id="otp3" data-next="otp4" data-prev="otp2">
+            <input type="text" class="otp-input" maxlength="1" id="otp4" data-next="otp5" data-prev="otp3">
+            <input type="text" class="otp-input" maxlength="1" id="otp5" data-next="otp6" data-prev="otp4">
+            <input type="text" class="otp-input" maxlength="1" id="otp6" data-prev="otp5">
         </div>
 
         <!-- Submit Button -->
-        <button class="btn-submit" id="verifyOtp">Submit</button>
+        <button class="btn-submit" id="verifyOtp" disabled>
+            Verify OTP
+            <div class="loader" id="loader"></div>
+        </button>
+
+        <!-- Resend OTP Link -->
+        <div class="resend-otp">
+            Didn't receive code? <a href="#" id="resendOtp">Resend OTP</a>
+        </div>
     </div>
 
-
     <script>
+        // Get phone number from URL and display it
+        const urlParams = new URLSearchParams(window.location.search);
+        const phoneNumber = urlParams.get('phone') || 'XXXXXXXXXX';
+        document.getElementById('phoneDisplay').textContent = `+91-${phoneNumber}`;
+
         // Simulate the OTP process
         const fakeOtp = "123456"; // Simulated OTP
+        let otpAttempts = 0;
+        const maxAttempts = 3;
 
-        // Get phone number from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const phoneNumber = urlParams.get('phone');
+        // OTP input handling
+        const otpInputs = document.querySelectorAll('.otp-input');
+        const verifyBtn = document.getElementById('verifyOtp');
+        const loader = document.getElementById('loader');
 
-        document.getElementById('otpMessage').innerText = `OTP has been sent to ${phoneNumber}. Kindly enter the 6-digit code.`;
+        // Auto-focus and move between inputs
+        otpInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value.length === 1) {
+                    this.classList.add('filled');
+                    const nextInput = document.getElementById(this.dataset.next);
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                } else {
+                    this.classList.remove('filled');
+                }
+                checkOtpComplete();
+            });
 
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value.length === 0) {
+                    const prevInput = document.getElementById(this.dataset.prev);
+                    if (prevInput) {
+                        prevInput.focus();
+                    }
+                }
+            });
+        });
+
+        // Check if all OTP fields are filled
+        function checkOtpComplete() {
+            const allFilled = Array.from(otpInputs).every(input => input.value.length === 1);
+            verifyBtn.disabled = !allFilled;
+        }
+
+        // Verify OTP
         document.getElementById('verifyOtp').addEventListener('click', function() {
-            const otpInput = [
-                document.getElementById('otp1').value,
-                document.getElementById('otp2').value,
-                document.getElementById('otp3').value,
-                document.getElementById('otp4').value,
-                document.getElementById('otp5').value,
-                document.getElementById('otp6').value
-            ].join('');
+            const otpInput = Array.from(otpInputs).map(input => input.value).join('');
+            
+            // Show loading animation
+            this.disabled = true;
+            loader.style.display = 'inline-block';
+            
+            // Simulate API call with delay
+            setTimeout(() => {
+                loader.style.display = 'none';
+                
+                otpAttempts++;
+                if (otpInput === fakeOtp) {
+                    // Success animation
+                    this.classList.add('animate__animated', 'animate__pulse');
+                    setTimeout(() => {
+                        this.classList.remove('animate__animated', 'animate__pulse');
+                        alert('OTP verified successfully!');
+                        window.location.href = '3.html';
+                    }, 1000);
+                } else {
+                    // Error animation
+                    otpInputs.forEach(input => {
+                        input.classList.add('animate__animated', 'animate__shakeX');
+                        setTimeout(() => {
+                            input.classList.remove('animate__animated', 'animate__shakeX');
+                        }, 1000);
+                    });
+                    
+                    if (otpAttempts >= maxAttempts) {
+                        alert('Maximum attempts reached. Please request a new OTP.');
+                        document.getElementById('resendOtp').click();
+                    } else {
+                        alert(`Invalid OTP. ${maxAttempts - otpAttempts} attempts remaining.`);
+                        this.disabled = false;
+                    }
+                }
+            }, 1500);
+        });
 
-            if (otpInput === fakeOtp) {
-                alert('OTP verified successfully!');
-                // Redirect to next page or perform further actions
-                window.location.href = '3.html';
-            } else {
-                alert('Invalid OTP. Please try again.');
-            }
+        // Resend OTP
+        document.getElementById('resendOtp').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Reset all inputs
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('filled');
+            });
+            
+            verifyBtn.disabled = true;
+            otpAttempts = 0;
+            
+            // Show resend animation
+            this.classList.add('animate__animated', 'animate__flash');
+            setTimeout(() => {
+                this.classList.remove('animate__animated', 'animate__flash');
+            }, 1000);
+            
+            alert('New OTP has been sent to your number.');
+            otpInputs[0].focus();
         });
     </script>
-       
 </body>
 </html>
