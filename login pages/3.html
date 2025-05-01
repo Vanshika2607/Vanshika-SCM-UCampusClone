@@ -3,187 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Form</title>
-    
+    <title>Welcome to UCampus</title>
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #333;
-            margin: 50px;
+        :root {
+            --primary-color: #e53935;
+            --primary-hover: #c62828;
+            --secondary-color: #0b90c8;
+            --text-color: #2d3436;
+            --light-gray: #f5f6fa;
+            --border-radius: 10px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
             padding: 0;
-            background-image: url(12.webp);
-            background-repeat: no-repeat;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('12.webp');
             background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            animation: fadeIn 1s ease-out;
         }
-        .background-clip{
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-        }
-        @media (min-aspect-ratio:16/9) {
-            .background-clip{
-                width: 100%;
-                height: auto;
-            }
-         }
-         @media (max-aspect-ratio: 16/9) {
-            .background-clip{
-                width: auto;
-                height: 100%;
-            }
-         }
         
         .container {
-            width: 100vh;
-            max-width: 400px;
-            margin: auto; 
-            padding: 20px;
-            box-sizing: border-box;
-            border: 5px solid grey;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transform: translateY(0);
+            transition: var(--transition);
+            animation: fadeInUp 0.8s ease-out;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
+        
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
         h1 {
-            font-size: 2em;
-            font-weight: bold;
-            color: #000;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            background: linear-gradient(to right, #e53935, #c62828);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 0.8s ease-out;
         }
-
+        
         h2 {
-            color: #000;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
         }
-
+        
+        .form-group {
+            margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+        
         label {
             display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-color);
         }
-
+        
+        .input-field {
+            position: relative;
+        }
+        
+        .input-field i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            transition: var(--transition);
+        }
+        
         input[type="text"],
         input[type="email"],
         input[type="date"],
-        input[type="number"] {
+        input[type="number"],
+        select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #dfe6e9;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background-color: var(--light-gray);
         }
-
-        input[type="radio"] {
-            margin-right: 10px;
+        
+        input:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
+            outline: none;
         }
-
-        .gender-label {
-            display: inline-block;
-            margin-right: 20px;
+        
+        input:focus + i {
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
         }
-
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #dfe6e9;
+            border-radius: 50%;
+            margin-right: 8px;
+            position: relative;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .radio-option input:checked {
+            border-color: var(--primary-color);
+        }
+        
+        .radio-option input:checked::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .radio-option label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+        
         .submit-button {
             width: 100%;
             padding: 15px;
-            background-color: #f00;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
             border: none;
-            color: #fff;
-            font-size: 16px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: var(--border-radius);
             margin-top: 20px;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(229, 57, 53, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
-
+        
         .submit-button:hover {
-            background-color: #c00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(229, 57, 53, 0.4);
+        }
+        
+        .submit-button:active {
+            transform: translateY(0);
+        }
+        
+        .submit-button i {
+            transition: var(--transition);
+        }
+        
+        .submit-button:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            input[type="text"],
+            input[type="email"],
+            input[type="date"],
+            input[type="number"],
+            select {
+                padding: 12px 12px 12px 40px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- <video autoplay loop muted plays-inline class="background-clip" >
-            <source src = "WhatsApp Video 2024-11-26 at 5.05.52 PM.mp4" type="video/mp4" >
-        </video> -->
-        <h1>Welcome</h1>
-        <h2>Help us Know You Better!</h2>
+        <h1 class="animate__animated animate__fadeInDown">Welcome</h1>
+        <h2 class="animate__animated animate__fadeIn">Help us Know You Better!</h2>
+        
         <form id="welcomeForm">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required>
-
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Your Email Address" required>
-
-            <label>Gender</label>
-            <label class="gender-label">
-                <input type="radio" name="gender" value="male" required> Male
-            </label>
-            <label class="gender-label">
-                <input type="radio" name="gender" value="female" required> Female
-            </label>
-
-            <label for="campus">Which campus</label>
-            <input type="text" id="campus" name="campus" placeholder="Himachal/Punjab">
-
-            <label for="dob">Date of Birth</label>
-            <input type="date" id="dob" name="dob">
-
-            <label for="referralCode">Referral Code</label>
-            <input type="text" id="referralCode" name="referralCode" placeholder="Referral Code">
-
-            <button type="submit" class="submit-button"> <a href="5.html" style="text-decoration: none; color: #e4d6d6;">Submit</a></button>
+            <div class="form-group animate__animated animate__fadeIn">
+                <label for="fullName">Full Name</label>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required>
+                </div>
+            </div>
+            
+            <div class="form-group animate__animated animate__fadeIn">
+                <label for="email">Email Address</label>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+            </div>
+            
+            <div class="form-group animate__animated animate__fadeIn">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="other" name="gender" value="other" required>
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group animate__animated animate__fadeIn">
+                <label for="campus">Which Campus</label>
+                <div class="input-field">
+                    <i class="fas fa-university"></i>
+                    <select id="campus" name="campus" required>
+                        <option value="" disabled selected>Select your campus</option>
+                        <option value="himachal">Himachal Campus</option>
+                        <option value="punjab">Punjab Campus</option>
+                        <option value="online">Online</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group animate__animated animate__fadeIn">
+                <label for="dob">Date of Birth</label>
+                <div class="input-field">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+            </div>
+            
+            <div class="form-group animate__animated animate__fadeIn">
+                <label for="referralCode">Referral Code (Optional)</label>
+                <div class="input-field">
+                    <i class="fas fa-gift"></i>
+                    <input type="text" id="referralCode" name="referralCode" placeholder="Enter referral code if any">
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-button animate__animated animate__fadeIn">
+                Submit Details
+                <i class="fas fa-arrow-right"></i>
+            </button>
         </form>
     </div>
 
     <script>
         document.getElementById('welcomeForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Request for location
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    // Location fetched successfully
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    alert(`Location fetched: Latitude: ${latitude}, Longitude: ${longitude}`);
-
-                    // Optionally, you can store or send this data
-                    // Redirect to the location permission page
-                    window.location.href = 'location-permission.html?lat=' + latitude + '&lon=' + longitude;
-                }, function() {
-                    // Handle location permission denied
-                    alert("Unable to retrieve your location. Please allow location access.");
-                });
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
+            event.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                gender: document.querySelector('input[name="gender"]:checked').value,
+                campus: document.getElementById('campus').value,
+                dob: document.getElementById('dob').value,
+                referralCode: document.getElementById('referralCode').value
+            };
+            
+            // Simulate API call with delay
+            setTimeout(() => {
+                // Request for location
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        // Success callback
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        
+                        // Add success animation
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Success!';
+                        submitBtn.style.background = 'linear-gradient(135deg, #4CAF50, #2E7D32)';
+                        
+                        setTimeout(() => {
+                            // Redirect to next page with data
+                            window.location.href = `5.html?name=${encodeURIComponent(formData.fullName)}&email=${encodeURIComponent(formData.email)}&lat=${latitude}&lon=${longitude}`;
+                        }, 1000);
+                        
+                    }, function(error) {
+                        // Error callback
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        
+                        // Add error animation
+                        const form = document.getElementById('welcomeForm');
+                        form.classList.add('animate__animated', 'animate__shakeX');
+                        setTimeout(() => {
+                            form.classList.remove('animate__animated', 'animate__shakeX');
+                        }, 1000);
+                        
+                        alert("Location access is required to proceed. Please enable location services.");
+                    });
+                } else {
+                    alert("Geolocation is not supported by your browser.");
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            }, 1500);
+        });
+        
+        // Add focus animations
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('animate__animated', 'animate__pulse');
+                setTimeout(() => {
+                    this.parentElement.classList.remove('animate__animated', 'animate__pulse');
+                }, 1000);
+            });
         });
     </script>
-    <!-- <script src="js/annyang.min.js"></script> -->
-    <!-- <script>
-        if (annyang) { -->
-  <!-- // Let's define our first command. First the text we expect, and then the function it should call
-//   var commands = {
-//     'night mode': function() {
-//       let root = document.documentElement;
-//       root.style.setProperty('--white', '#000');
-//       root.style.setProperty('--black','#fff');
-//     },
-//     'day mode': function() {
-//       let root = document.documentElement;
-//       root.style.setProperty('--white', '#fff');
-//       root.style.setProperty('--black','#000');
-//     },
-//   };
-
-  // Add our commands to annyang
-//   annyang.addCommands(commands);
-
-  // Start listening. You can call this here, or attach this call to an event, button, etc.
-//   annyang.start(); -->
-<!-- }
-    </script> -->
 </body>
 </html>
